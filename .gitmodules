@@ -1,0 +1,3 @@
+[submodule "HermesOB/Data/CreditBased"]
+	path = HermesOB/Data/CreditBased
+	url = git@github.com:aedalzotto/Hermes-Output-Buffer.git
