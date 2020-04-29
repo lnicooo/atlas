@@ -1,0 +1,14 @@
+javac -classpath . -Xlint:none *.java
+javac -classpath . -Xlint:none AtlasPackage/*.java
+javac -classpath . -Xlint:none Hefestus/*.java
+javac -classpath . -Xlint:none HermesOB/*.java
+javac -classpath . -Xlint:none HermesCRC/*.java
+javac -classpath . -Xlint:none HermesSR/*.java
+javac -classpath . -Xlint:none HermesTU/*.java
+javac -classpath . -Xlint:none HermesTB/*.java
+javac -classpath . -Xlint:none Jupiter/*.java
+javac -classpath . -Xlint:none Maia/*.java
+javac -classpath . -Xlint:none TrafficMbps/*.java
+javac -classpath . -Xlint:none TrafficMeasurer/*.java
+javac -classpath . -Xlint:none Tester/*.java
+

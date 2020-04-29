@@ -1,0 +1,46 @@
+ABOUT ATLAS 
+
+  The Atlas environment automates the various processes related to the design flow for some of NoCs proposed by the GAPH Group and eventually by other groups with which we collaborate. Currently, the design flow is composed by the following stages: NoC generation, traffic generation, simulation, performance and power evaluation. In the NoC generation, the NoC parameters (for example, channel bandwidth, buffer depth, number of virtual channels, flow control strategies) are configured. In the traffic generation, the traffic sceneries are generated to characterize the applications which execute on the NoC. In the simulation, the traffic data are injected in the NoC, occurring in this step the effective communication among the cores. In the performance evaluation, it is possible to generate graphics, tables, maps and reports to help in the analysis of obtained results.
+
+  Please, check https://corfu.pucrs.br/redmine/projects/atlas/wiki for the complete documentation about Atlas.
+
+SOFTWARE INSTALATION
+
+ Check the website https://corfu.pucrs.br/redmine/projects/atlas/wiki/Install for updated information about instalation procedures.
+
+A simple installation procedure on Linux run as follows:
+
+1) Make sure you have the javac compiler installed in your system; In my system, I tried 
+linux-prompt> which javac
+/usr/bin/javac
+
+2) Go to the Atlas source directory. I will use here my own installation folder (/home/calazans/Work/Atlas/atlas/);
+
+3) Run the linuxcompile script using the line below and wait for the compilation process to finish. The messages below are normal and pose no problem.
+linux-prompt> source linuxcompile
+Note: Some input files use unchecked or unsafe operations.
+Note: Recompile with -Xlint:unchecked for details.
+Note: AtlasPackage/NoCGenerationGUI.java uses unchecked or unsafe operations.
+Note: Recompile with -Xlint:unchecked for details.
+Note: Jupiter/JupiterInterface.java uses unchecked or unsafe operations.
+Note: Recompile with -Xlint:unchecked for details.
+Note: Some input files use unchecked or unsafe operations.
+Note: Recompile with -Xlint:unchecked for details.
+Note: TrafficMeasurer/TrafficInterface.java uses unchecked or unsafe operations.
+Note: Recompile with -Xlint:unchecked for details.
+
+4) Set the ATLAS_HOME environment variable to the installation folder. I did
+linux-prompt> export ATLAS_HOME=/home/calazans/Work/Atlas/atlas/
+
+5) If you want to execute functional simulation you will need Mentor Modelsim Simulator. I use for example "Modelsim V10.3c". If you decide you can and will use it, make sure the path to the vsim executable is in your PATH environment variable. Otherwise, you may just say OK not to use Modelsim in the Java Dialog Box. Also, Atlas allows you to generate several traffic patterns to apply to your NoC. If you want to see graphs of the generated traffic patterns, as well as the graphs of the simulation results, you should have gnuplot installed and available from your PATH. I employ "gnuplot 5.0 patchlevel 3".
+
+6) If you simulate the NoC and want to see results of the simulation, you will need to point to web browser, since data is generated in html format. When running Atlas for the first time, you will be asked to browse and show wher your web browser application is located.
+
+7) Run the atlas environment using the case-sensitive line below
+linux-prompt> java Atlas
+
+8) After 7) you should see the GUI of the Atlas environment.
+
+9) The environment can also run on Windows, but this it is far less stable than the Linux version.
+
+10) Good Luck!
