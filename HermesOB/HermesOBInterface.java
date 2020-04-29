@@ -38,19 +38,31 @@ public class HermesOBInterface extends NoCGenerationGUI implements ActionListene
 		addMenu(this);
 		//GAPH Icon
 		addGaphIcon(690,y,90,27);
+		//Flow control
+		y=y+20;
+		String[] availableFlowControl = {"CreditBased"};
+		addFlowControl(x, y, dimx, dimy, availableFlowControl, noc.getFlowControl(), this);
+		//Scheduling algorithm
+		y=y+63;
+		String[] availableScheduling = {"RoundRobin"};
+		addScheduling(x, y, dimx, dimy, availableScheduling, noc.getScheduling(), this);
 		//NoC dimensionsh
-		y+=20;
-		String[] dimension = {"3"};
+		y=y+63;
+		String[] dimension = { "2", "3", "4", "5", "6", "7", "8", "9", "10", "11","12", "13", "14", "15", "16"};
 		addDimensions(x, y, dimx, dimy, dimension, ""+noc.getNumRotX(), ""+noc.getNumRotY(), this);
 		//Flit width
 		y+=60;
-		String[] availableFlitWidth = { "4", "8", "16", "32" };
+		String[] availableFlitWidth = { "4", "8", "16", "32", "64" };
 		addFlitWidth(x, y, dimx, dimy, availableFlitWidth, ""+noc.getFlitSize(), this);
 		//Buffer depth
 		y+=stepy;
-		String[] availableDepth = { "4", "8", "16", "32" };
+		String[] availableDepth = { "2", "4", "8" };
 		addBuffer(x, y, dimx, dimy, availableDepth, ""+noc.getBufferDepth());
-		
+		//routing algorithm
+		y=y+63;
+		String[] availableAlgorithm = {"XY"};
+		addRoutingAlgorithm(x, y, dimx, dimy, availableAlgorithm, "XY");
+
 		//Generate button
 		y = y + 150 + stepy;
 		addGenerateButton(x, y, dimx, 40, this);
@@ -58,7 +70,9 @@ public class HermesOBInterface extends NoCGenerationGUI implements ActionListene
 		addNoCPanel(180, 30, 600, 557, noc.getType());
 		
 		//Fixed parameters
-		getFlitWidth().setEnabled(false);
+		getFlowControl().setEnabled(false);
+		getScheduling().setEnabled(false);
+		getRoutingAlgorithm().setEnabled(false);
 		
 	}
 
@@ -76,7 +90,7 @@ public class HermesOBInterface extends NoCGenerationGUI implements ActionListene
 		noc.setFlitSize(Integer.valueOf(getFlitWidthSelected()).intValue());
 		noc.setBufferDepth(Integer.valueOf(getBufferDepthSelected()).intValue());
 		noc.setCyclesPerFlit(1);
-		noc.setCyclesToRoute(5);
+		noc.setCyclesToRoute(3);
 		project.setNoCGenerate(true);
 		project.setTrafficGenerate(true);
 		project.setPowerEstimated(false);
