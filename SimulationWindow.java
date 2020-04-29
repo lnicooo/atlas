@@ -17,6 +17,7 @@ public class SimulationWindow extends JFrame implements ActionListener{
 	private Project project;
 	private NoC noc;
 	private boolean isHermesSR;
+	private boolean isHermesOB;
 	private int nCV;
 	private Scenery scenery;
 	private JTextField tName,tRouting,tCTRLRouting,tGSRouting,tBERouting,tTime,tTimeW;
@@ -41,6 +42,7 @@ public class SimulationWindow extends JFrame implements ActionListener{
 		setTitle(project.getPath()+File.separator + "Traffic");
 		int x=(this.noc.getType().equalsIgnoreCase("HermesSR"))?40:0;
 		isHermesSR=(x==40);
+		isHermesOB = this.noc.getType().equalsIgnoreCase("HermesOB");
 		nCV=this.noc.getVirtualChannel();
 		if((isHermesSR)&&(nCV==4)) x*=3;
 
@@ -870,7 +872,11 @@ public class SimulationWindow extends JFrame implements ActionListener{
 			dispose();
 			repaint();
 			if(noc.isSCTB()){
-				updateInternalSimulation(cbInternal.isSelected());
+				if(isHermesOB)
+					// Placeholder: generate constants
+					System.out.print("Is Hermes OB!\n");
+				else
+					updateInternalSimulation(cbInternal.isSelected());
 				
 				if(isHermesSR) 
 					createSCNI();

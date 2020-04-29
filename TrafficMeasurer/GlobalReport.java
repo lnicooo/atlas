@@ -398,7 +398,7 @@ public class GlobalReport extends Thread{
 		int targetX = target % nRotX;
 		int targetY = target / nRotX;
 
-		if(noc.getType().equalsIgnoreCase("Hermes")){
+		if(noc.getType().equalsIgnoreCase("Hermes") || noc.getType().equalsIgnoreCase("HermesOB")){
 
 			if(targetX > sourceX)
 				nRoutersX = targetX - sourceX;

@@ -89,7 +89,9 @@ public class HermesOBCreditBased extends NoCGenerationCB{
   		ManipulateFile.copy(new File(modulesDir + "RouterOutputModule.cpp"), nocModulesDir);
   		ManipulateFile.copy(new File(modulesDir + "InputModule.hpp"), nocModulesDir);
   		ManipulateFile.copy(new File(modulesDir + "OutputModule.hpp"), nocModulesDir);
-  		ManipulateFile.copy(new File(modulesDir + "RouterOutputModule.hpp"), nocModulesDir);
+		ManipulateFile.copy(new File(modulesDir + "RouterOutputModule.hpp"), nocModulesDir);
+		ManipulateFile.copy(new File(modulesDir + "standards.hpp"), nocModulesDir);
+		ManipulateFile.copy(new File(modulesDir + "constants.hpp"), nocModulesDir);
 
   		ManipulateFile.copy(new File(sourceDir + "simulate.do"), projectDir);
   		ManipulateFile.copy(new File(sourceDir + "wave.do"), projectDir);
