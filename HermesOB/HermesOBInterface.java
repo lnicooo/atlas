@@ -5,7 +5,7 @@ import javax.swing.*;
 import AtlasPackage.*;
 
 /**
- * This class creates the HermesCRC GUI allowing select the HermesCRC NoC parameters and generate it.
+ * This class creates the HermesOB GUI allowing select the HermesOB NoC parameters and generate it.
  * @author Nicolas Lodéa e Angelo Elias Dalzotto
  * @version
  */

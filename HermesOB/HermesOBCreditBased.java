@@ -39,9 +39,9 @@ public class HermesOBCreditBased extends NoCGenerationCB{
 		projectDir = project.getPath() + File.separator;
 		nocDir     = projectDir + "NOC" + File.separator; 
 
-		nocHermesDir = nocDir + "hermes" + File.separator;
+		nocHermesDir = projectDir + "hermes" + File.separator;
 		hermesDir = sourceDir + "hermes" + File.separator;
-		nocModulesDir = nocDir + "modules" + File.separator;
+		nocModulesDir = projectDir + "modules" + File.separator;
 		modulesDir = sourceDir + "modules" + File.separator;
 
 	}
@@ -84,12 +84,12 @@ public class HermesOBCreditBased extends NoCGenerationCB{
   		ManipulateFile.copy(new File(hermesDir + "constants.vhd"), nocHermesDir);
   		ManipulateFile.copy(new File(hermesDir + "node.vhd"), nocHermesDir);
   		ManipulateFile.copy(new File(hermesDir + "router.vhd"), nocHermesDir);
-  		ManipulateFile.copy(new File(modulesDir + "SC_InputModule.cpp"), nocModulesDir);
-  		ManipulateFile.copy(new File(modulesDir + "SC_OutputModule.cpp"), nocModulesDir);
-  		ManipulateFile.copy(new File(modulesDir + "SC_OutputModuleRouter.cpp"), nocModulesDir);
-  		ManipulateFile.copy(new File(modulesDir + "SC_InputModule.h"), nocModulesDir);
-  		ManipulateFile.copy(new File(modulesDir + "SC_OutputModule.h"), nocModulesDir);
-  		ManipulateFile.copy(new File(modulesDir + "SC_OutputModuleRouter.h"), nocModulesDir);
+  		ManipulateFile.copy(new File(modulesDir + "InputModule.cpp"), nocModulesDir);
+  		ManipulateFile.copy(new File(modulesDir + "OutputModule.cpp"), nocModulesDir);
+  		ManipulateFile.copy(new File(modulesDir + "RouterOutputModule.cpp"), nocModulesDir);
+  		ManipulateFile.copy(new File(modulesDir + "InputModule.hpp"), nocModulesDir);
+  		ManipulateFile.copy(new File(modulesDir + "OutputModule.hpp"), nocModulesDir);
+  		ManipulateFile.copy(new File(modulesDir + "RouterOutputModule.hpp"), nocModulesDir);
 
   		ManipulateFile.copy(new File(sourceDir + "simulate.do"), projectDir);
   		ManipulateFile.copy(new File(sourceDir + "wave.do"), projectDir);
