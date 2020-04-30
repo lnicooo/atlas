@@ -17,10 +17,7 @@ public class HermesOBCreditBased extends NoCGenerationCB{
 
 	private String projectDir, nocDir, hermesDir,nocHermesDir,nocModulesDir,modulesDir;
     private String algorithm, nocType;
-    private int dimX, dimY, dimension, flitSize;
-	private boolean isSC, isSabot, isDr, isDf, isGn, isGp;
-	private boolean isLinkCRC, isSourceCRC, isHammingCRC;
-	private Vector<String> vectorSwitch;
+    private int dimX, dimY, dimension, flitSize, bufferSize;
 
 	/**
 	 * Generate a HermesOB NoC.
@@ -34,8 +31,8 @@ public class HermesOBCreditBased extends NoCGenerationCB{
 		dimY = noc.getNumRotY();
 		dimension = dimX * dimY;
 		flitSize = noc.getFlitSize();
+		bufferSize = noc.getBufferDepth();
 
-		vectorSwitch = new Vector<String>();
 		projectDir = project.getPath() + File.separator;
 		nocDir     = projectDir + "NOC" + File.separator; 
 
@@ -51,12 +48,11 @@ public class HermesOBCreditBased extends NoCGenerationCB{
 	 */
 	public void generate(){
 		//create the project directory tree
-		makeDiretories();
+		//makeDiretories();
 		// Copy and create NoC VHDL files for synthesis
 		copyNoCFiles();		
-		//create HermesPackage.vhd 
-		//createPackage("Hermes_package.vhd");
-		
+		updateConstantHpp();
+		updateConstantVhd();
 	}
 
 /*********************************************************************************
@@ -99,4 +95,146 @@ public class HermesOBCreditBased extends NoCGenerationCB{
   		
   	}
 
+
+
+	/**
+	 * Update the simulate.do according to Internal Simulation option.
+	 */
+	public void updateConstantHpp(){
+		DataOutputStream dos;
+
+		StringTokenizer st;
+		String line, word;
+
+		String nameTemp = nocModulesDir + File.separator + "temp.txt";
+		String constFile = nocModulesDir + File.separator + "constants.hpp";
+
+		//create a temporary file, after update data
+		copyFile(new File(constFile), new File(nameTemp));	
+
+		try{
+			FileInputStream fis=new FileInputStream(nameTemp);
+			BufferedReader br=new BufferedReader(new InputStreamReader(fis));
+
+			dos=new DataOutputStream(new FileOutputStream(constFile));
+
+			line=br.readLine();
+			while(line!=null){
+				st = new StringTokenizer(line, " ");
+				int nTokens = st.countTokens();
+				
+				if(nTokens!=0){
+					while (st.hasMoreTokens()){
+
+						word = st.nextToken();
+						
+						if(word.equalsIgnoreCase("FLIT_SIZE")){
+						    line = "	const unsigned int " + word + " = " + flitSize;
+							
+						}
+					}
+
+				}
+				
+				dos.writeBytes(line+"\n");
+				line=br.readLine();
+			}
+			br.close();
+			fis.close();
+			dos.close();
+			//delete the temporary file
+			//File file = new File(nameTemp);
+			//file.delete();
+			
+			
+		}
+		
+		catch(Exception e){
+			System.out.println("Erro");
+			System.exit(0);
+		}
+	}
+
+	/**
+	 * Update the simulate.do according to Internal Simulation option.
+	 */
+	public void updateConstantVhd(){
+
+		DataOutputStream dos;
+
+		StringTokenizer st;
+		String line, word;
+
+		String nameTemp = nocHermesDir + File.separator + "temp.txt";
+		String constFile = nocHermesDir + File.separator + "constants.vhd";
+
+		//create a temporary file, after update data
+		copyFile(new File(constFile), new File(nameTemp));	
+
+		try{
+			FileInputStream fis=new FileInputStream(nameTemp);
+			BufferedReader br=new BufferedReader(new InputStreamReader(fis));
+
+			dos=new DataOutputStream(new FileOutputStream(constFile));
+
+			line=br.readLine();
+			
+			while(line!=null){
+				st = new StringTokenizer(line, " ");
+				int nTokens = st.countTokens();
+				
+				if(nTokens!=0){
+					while (st.hasMoreTokens()){
+
+						word = st.nextToken();
+							
+						if(word.equalsIgnoreCase("BUFFER_SIZE")){
+						    line = "	constant BUFFER_SIZE: integer := " + bufferSize;
+						    
+						}
+
+						if(word.equalsIgnoreCase("FLIT_SIZE")){
+						    line = "	constant FLIT_SIZE: integer range 1 to 64 := " + flitSize;
+						    
+						}
+						
+					}
+
+				}
+				dos.writeBytes(line+"\n");
+				line=br.readLine();
+			}
+
+			br.close();
+			fis.close();
+			dos.close();
+			//delete the temporary file
+			//File file = new File(nameTemp);
+			//file.delete();
+			
+		}
+		
+		catch(Exception e){
+			System.out.println("Erro");
+			System.exit(0);
+		}
+	}
+	private void copyFile(File fileIn,File fileOut){
+		try{
+			FileReader in = new FileReader(fileIn);
+			FileWriter out = new FileWriter(fileOut);
+			int c;
+			while ((c = in.read()) != -1){
+				out.write(c);
+			}
+			in.close();
+			out.close();
+		}
+		catch(Exception e){
+			System.out.println("Erro");
+			System.exit(0);
+		}
+
+		
+	}
 }
