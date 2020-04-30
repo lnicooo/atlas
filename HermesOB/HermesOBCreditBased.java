@@ -129,8 +129,18 @@ public class HermesOBCreditBased extends NoCGenerationCB{
 						word = st.nextToken();
 						
 						if(word.equalsIgnoreCase("FLIT_SIZE")){
-						    line = "	const unsigned int " + word + " = " + flitSize;
+						    line = "	const unsigned int " + word + " = " + flitSize + ";";
 							
+						}
+
+						if(word.equalsIgnoreCase("X_SIZE")){
+						    line = "	const unsigned int X_SIZE = " + dimX + ";";
+						    
+						}
+
+						if(word.equalsIgnoreCase("Y_SIZE")){
+						     line = "	const unsigned int Y_SIZE = " + dimY + ";";
+						    
 						}
 					}
 
@@ -189,15 +199,24 @@ public class HermesOBCreditBased extends NoCGenerationCB{
 						word = st.nextToken();
 							
 						if(word.equalsIgnoreCase("BUFFER_SIZE")){
-						    line = "	constant BUFFER_SIZE: integer := " + bufferSize;
+						    line = "	constant BUFFER_SIZE: integer := " + bufferSize + ";";
 						    
 						}
 
 						if(word.equalsIgnoreCase("FLIT_SIZE")){
-						    line = "	constant FLIT_SIZE: integer range 1 to 64 := " + flitSize;
+						    line = "	constant FLIT_SIZE: integer range 1 to 64 := " + flitSize + ";";
 						    
 						}
-						
+
+						if(word.equalsIgnoreCase("X_SIZE")){
+						    line = "	constant X_SIZE : integer := " + dimX + ";";
+						    
+						}
+
+						if(word.equalsIgnoreCase("Y_SIZE")){
+						    line = "	constant Y_SIZE : integer := " + dimY + ";";
+						    
+						}
 					}
 
 				}
@@ -219,6 +238,8 @@ public class HermesOBCreditBased extends NoCGenerationCB{
 			System.exit(0);
 		}
 	}
+
+
 	private void copyFile(File fileIn,File fileOut){
 		try{
 			FileReader in = new FileReader(fileIn);
